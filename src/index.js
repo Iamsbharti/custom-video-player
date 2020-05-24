@@ -42,6 +42,19 @@ function handleProgressBar() {
   //update the flex-basis option
   progressbar.style.flexBasis = `${progress_percentage}%`;
 }
+
+//handle progress bar click
+
+function progressScrub(e) {
+  //event gives the offset values of the click on the bar
+  //offsetwidth gives the complete value of the bar
+  //and the whole ops gives the % duration of video
+  const annonymousTime = (e.offsetX / progress.offsetWidth) * video.duration;
+
+  //update the video time
+  video.currentTime = annonymousTime;
+}
+
 /**Add the event listeners */
 //play/pause video
 video.addEventListener("click", togglePlay);
@@ -59,3 +72,6 @@ range.forEach(range => range.addEventListener("change", handleRangeUpdate));
 
 //listen to the timechange event of video and update the progressBar
 video.addEventListener("timeupdate", handleProgressBar);
+
+//listem to click on progree bar and update time
+progress.addEventListener("click", progressScrub);
