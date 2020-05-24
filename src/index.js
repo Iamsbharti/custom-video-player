@@ -74,4 +74,9 @@ range.forEach(range => range.addEventListener("change", handleRangeUpdate));
 video.addEventListener("timeupdate", handleProgressBar);
 
 //listem to click on progree bar and update time
+//click & drag event on progress bar
+let mouseDown = false;
 progress.addEventListener("click", progressScrub);
+progress.addEventListener("mousemove", e => mouseDown && progressScrub(e));
+progress.addEventListener("mousedown", () => (mouseDown = true));
+progress.addEventListener("mouseup", () => (mouseDown = false));
