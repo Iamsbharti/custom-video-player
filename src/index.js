@@ -80,3 +80,18 @@ progress.addEventListener("click", progressScrub);
 progress.addEventListener("mousemove", e => mouseDown && progressScrub(e));
 progress.addEventListener("mousedown", () => (mouseDown = true));
 progress.addEventListener("mouseup", () => (mouseDown = false));
+
+//listener for identifying key sequence
+const pressed = [];
+const secretCode = "life42";
+window.addEventListener("keyup", e => {
+  pressed.push(e.key);
+
+  pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+
+  if (pressed.join("").includes(secretCode)) {
+    console.log("Code found");
+    cornify_add();
+  }
+  console.log(pressed);
+});
