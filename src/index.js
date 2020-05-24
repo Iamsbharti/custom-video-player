@@ -34,6 +34,14 @@ function handleRangeUpdate() {
   //name and value will give the actual prop name & value of the slider
   video[this.name] = this.value;
 }
+
+//handle video's progress bar
+function handleProgressBar() {
+  //calculate the % with video's currenttime and duration
+  const progress_percentage = (video.currentTime / video.duration) * 100;
+  //update the flex-basis option
+  progressbar.style.flexBasis = `${progress_percentage}%`;
+}
 /**Add the event listeners */
 //play/pause video
 video.addEventListener("click", togglePlay);
@@ -48,3 +56,6 @@ skipButtons.forEach(btn => btn.addEventListener("click", skip));
 
 //listen to slider i.e. volume and playBackSpeed
 range.forEach(range => range.addEventListener("change", handleRangeUpdate));
+
+//listen to the timechange event of video and update the progressBar
+video.addEventListener("timeupdate", handleProgressBar);
