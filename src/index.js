@@ -11,7 +11,7 @@ const toggle = player.querySelector(".toggle");
 
 const skipButtons = player.querySelectorAll("[data-skip]");
 
-const range = player.querySelector(".player__slider");
+const range = player.querySelectorAll(".player__slider");
 
 /** Build out functions*/
 //play video
@@ -28,6 +28,12 @@ function updateButton() {
 function skip() {
   video.currentTime += parseInt(this.dataset.skip, 10);
 }
+//adjust volume and play back speed
+function handleRangeUpdate() {
+  //volume and playbackRate are properties of video
+  //name and value will give the actual prop name & value of the slider
+  video[this.name] = this.value;
+}
 /**Add the event listeners */
 //play/pause video
 video.addEventListener("click", togglePlay);
@@ -39,3 +45,6 @@ video.addEventListener("pause", updateButton);
 
 //listen for skip buttons
 skipButtons.forEach(btn => btn.addEventListener("click", skip));
+
+//listen to slider i.e. volume and playBackSpeed
+range.forEach(range => range.addEventListener("change", handleRangeUpdate));
